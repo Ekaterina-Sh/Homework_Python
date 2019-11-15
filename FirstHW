@@ -1,1 +1,49 @@
-Hello World 
+# -*- coding: utf-8 -*-
+import random
+
+Eng = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm'
+Rus = 'абвгдеёжзиклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+Num = '1234567890!@#$%^&*()'
+En = False
+Ru = False
+Password_Lan = input('Выберите язык(1 - Английский, 2 - Русский): ')
+
+if Password_Lan == "1": En = True # Пароль должен содержать символы в верхнем регистре (True - да | False - нет)
+if Password_Lan == "2": Ru = True # Пароль должен содержать символы в нижнем регистре (True - да | False - нет)
+NU = True  # Пароль должен содержать цифры (True - да | False - нет)
+
+Password_len = input('Длина пароля: ')
+if Password_len:
+    if Password_len.isdigit() == True:
+        Password_len = int(Password_len)
+    else:
+        print('Выход... Значение должно быть числовое...')
+        exit(0)
+else:
+    print('Выход... Не указана Длина пароля...')
+    exit(0)
+
+Password_cou = 1
+print('\n')
+
+Pass_Symbol = []
+if En == True:
+    Pass_Symbol.extend(list(Eng))
+
+if Ru == True:
+    Pass_Symbol.extend(list(Rus))
+
+if NU == True:
+    Pass_Symbol.extend(list(Num))
+random.shuffle(Pass_Symbol)
+psw = []
+
+for yx in range(Password_cou):
+    psw.append(''.join([random.choice(Pass_Symbol) for x in range(Password_len)]))
+
+file_Pass = open('Password.txt', 'w')
+file_Pass.write('\n'.join(psw))
+file_Pass.close()
+
+print('\n'.join(psw))
+print('\n')
